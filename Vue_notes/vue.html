@@ -1,0 +1,88 @@
+<html>
+   <head>
+      <title>VueJs Demo Example</title>
+      <script src="https://unpkg.com/vue@3"></script>
+      </script>
+   </head>
+   <body>
+      <div id="app">
+         <h1 :class="changeBorder">test</h1>
+         <button @click="AddGoals">Click</button>
+
+         <input type="text" v-on:input="setName($event,'instance')" />
+<ul v-show="newData.length>0" >
+    <li v-for="(value, index) in newData" :key="value"
+    @click="removeItem(index)" >
+        <p>{{value}}</p> <input type="text" @click.stop></li>
+   
+</ul>
+<ul>
+    <li v-for="(value,key,index) in {name:'data',mark:'200'}">{{key}} - {{value}} - {{index}}</li>
+</ul>
+<p v-show="newData.length==0">Hello there please add a goal</p>
+      </div>
+
+      <script>
+        const { createApp } = Vue
+        createApp({
+          data() {
+            return {
+              message: 'Hello Vue!',
+              count: 0,
+              colo:false,
+              name:'',
+              count2:100,
+              newData:[]
+            }
+          }, 
+          methods:{
+              incrementer(){
+                  console.log('incrementer');
+                  this.count++;
+              },decrease(){
+                  this.count2--;
+              },
+              changeColor(){
+                  console.log('incoming');
+                  this.colo=!this.colo;
+              },
+              setName(event,lastname){
+                  console.log(this.name,' ',lastname);
+                  this.name=event.target.value+' '+lastname;
+              },
+              AddGoals(){
+                  this.newData.push(`Coloumn ${this.name}`);
+              },
+              removeItem(id){
+                  console.log(id,'id');
+            this.newData.splice(id,1);
+              }
+          },
+          computed:{
+              decrementer(){
+                  console.log('data running');
+                  return this.count2--;
+              },
+              changeBorder(){
+                  return {demo:this.colo};
+              }
+          }
+        }).mount('#app')
+      </script>
+   </body>
+</html>
+
+<style>
+    div {
+  width: 300px;
+  padding: 50px;
+  margin: 20px;
+}
+.demo{
+      width: 300px;
+      border:10px solid green;
+  padding: 50px;
+  margin: 20px;
+  backgroundColor:green;
+}
+</style>

@@ -1,0 +1,77 @@
+<html>
+   <head>
+      <title>VueJs Demo Example</title>
+      <script src="https://unpkg.com/vue@3"></script>
+      </script>
+   </head>
+   <body>
+       <section id="app">
+           
+ 
+      <h1>{{ message }}</h1>
+      <input type="text" ref="userText">
+      <button @click="setText">SetText</button>
+            </section>
+      <section id="app2">
+          
+      </section>
+
+      <script>
+        const { createApp } = Vue
+       const app= createApp({
+          data() {
+            return {
+              message: 'Hello Vue!'
+            }
+          },
+          methods:{
+              setText(){
+                  console.dir(this.$refs.userText);
+                  this.message=this.$refs.userText.value;
+              }
+          },
+          beforeCreate(){
+              console.log("before created");
+          },
+          created(){
+              console.log("created");
+          },
+          mounted(){
+              console.log("mounted");
+          },
+          beforeMount(){
+              console.log('before mount');
+          },
+          beforeUpdate(){
+              console.log('before updated');
+          },
+          updated(){
+              console.log('updated');
+          },
+          beforeUnmount(){
+              console.log('beforeUnmount');
+          },
+          unmounted(){
+              console.log("unmounted");
+          }
+        });
+        app.mount('#app');
+        
+        setTimeout(function(){
+        app.unmount();     
+        },3000);
+       
+        
+        Vue.createApp({
+            template:`<p>{{message3}}</p>
+            <h1>{{ message2 }}</h1>`,
+            data(){
+                return{
+                    message2:"data pointer",
+                    message3:"message three"
+                }
+            }
+        }).mount("#app2");
+      </script>
+   </body>
+</html>
